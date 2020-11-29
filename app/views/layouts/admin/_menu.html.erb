@@ -1,0 +1,100 @@
+<ul class="nav main-menu">
+	<% if can? :read, User %>
+	<li class="dropdown">
+		<a class="dropdown-toggle dropmenu<% if params[:controller]=='admin/operators' || params[:controller]=='admin/users' || params[:controller]=='admin/family_categories' || params[:controller]=='admin/families' || params[:controller]=='admin/educations'  || params[:controller]=='admin/live_types' %> active<% end %>" data-toggle="dropdown" href="#">
+			<i class="glyphicon glyphicon-user glyphicon glyphicon-white"></i>
+			<%=t(:menu_user)%>
+			<span class="caret"></span>
+		</a>
+		<ul	class="dropdown-menu<% if params[:controller]=='admin/operators' || params[:controller]=='admin/users' || params[:controller]=='admin/family_categories' || params[:controller]=='admin/families' || params[:controller]=='admin/educations'  || params[:controller]=='admin/live_types' %> current<% end %>">
+			<% if can? :read, Operator %>
+			<li><%=link_to admin_operators_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon glyphicon-white"></i>
+				<%=t(:submenu_operator)%><% end %></li>
+			<% end %>
+			<% if can? :read, User %>
+			<li><%=link_to admin_users_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon glyphicon-white"></i>
+				<%=t(:submenu_user)%><% end %></li>
+			<% end %>
+			<% if can? :read, FamilyCategory %>
+			<li><%=link_to admin_family_categories_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon glyphicon-white"></i>
+				<%=t(:submenu_family_category)%><% end %></li>
+			<% end %>
+			<% if can? :read, Family %>
+			<li><%=link_to admin_families_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon glyphicon-white"></i>
+				<%=t(:submenu_family)%><% end %></li>
+			<% end %>
+			<% if can? :read, Education %>
+			<li><%=link_to admin_educations_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon glyphicon-white"></i>
+				<%=t(:submenu_education)%><% end %></li>
+			<% end %>
+			<% if can? :read, Education %>
+			<li><%=link_to admin_live_types_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon glyphicon-white"></i>
+				<%=t(:submenu_live_type)%><% end %></li>
+			<% end %>
+		</ul>
+	</li>
+	<% end %>
+	<% if  can?(:read, QuestionCategory) || can?(:read, Question) || can?(:read, Answer) || can?(:read, SubAnswer) %>
+	<li class="dropdown">
+		<a class="dropdown-toggle dropmenu<% if params[:controller]=='admin/question_categories' || params[:controller]=='admin/questions' || params[:controller]=='admin/answers' || params[:controller]=='admin/sub_questions' || params[:controller]=='admin/sub_answers' %> active<% end %>" data-toggle="dropdown" href="#">
+			<i class="glyphicon glyphicon-list-alt glyphicon-white"></i>
+			<%=t(:menu_question)%>
+			<span class="caret"></span>
+		</a>
+		<ul	class="dropdown-menu<% if params[:controller]=='admin/question_categories' || params[:controller]=='admin/questions' || params[:controller]=='admin/answers' || params[:controller]=='admin/sub_questions' || params[:controller]=='admin/sub_answers' %> current<% end %>">
+			<% if can? :read, QuestionCategory %>
+			<li><%=link_to admin_question_categories_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon-white"></i>
+				<%=t(:submenu_question_category)%><% end %></li>
+			<% end %>
+			<% if can? :read, Question %>
+			<li><%=link_to admin_questions_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon-white"></i>
+				<%=t(:submenu_question)%><% end %></li>
+			<% end %>
+			<% if can? :read, Answer %>
+			<li><%=link_to admin_answers_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon-white"></i>
+				<%=t(:submenu_answer)%><% end %></li>
+			<% end %>
+			<% if can? :read, Question %>
+			<li><%=link_to admin_sub_questions_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon-white"></i>
+				<%=t(:submenu_sub_question)%><% end %></li>
+			<% end %>
+			<% if can? :read, SubAnswer %>
+			<li><%=link_to admin_sub_answers_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon-white"></i>
+				<%=t(:submenu_sub_answer)%><% end %></li>
+			<% end %>
+		</ul>
+	</li>
+	<% end %>
+	<% if can?(:read, UsersQuestion) || can?(:read, UsersQuestionsAnswer)  %>
+	<li class="dropdown">
+		<a class="dropdown-toggle dropmenu<% if params[:controller]=='admin/users_questions' || params[:controller]=='admin/users_questions_answers' %> active<% end %>" data-toggle="dropdown" href="#">
+			<i class="glyphicon glyphicon-list-alt glyphicon-white"></i>
+			<%=t(:menu_users_question)%>
+			<span class="caret"></span>
+		</a>
+		<ul	class="dropdown-menu<% if params[:controller]=='admin/users_questions' || params[:controller]=='admin/users_questions_answers' %> current<% end %>">
+			<% if can? :read, UsersQuestion %>
+			<li><%=link_to admin_users_questions_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon-white"></i>
+				<%=t(:submenu_users_question)%><% end %></li>
+			<% end %>
+			<% if can? :read, UsersQuestionsAnswer %>
+			<li><%=link_to admin_users_questions_answers_path do %>
+				<i class="glyphicon glyphicon-th-list glyphicon-white"></i>
+				<%=t(:submenu_users_questions_answer)%><% end %></li>
+			<% end %>
+		</ul>
+	</li>
+	<% end %>
+</ul>

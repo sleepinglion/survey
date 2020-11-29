@@ -1,0 +1,55 @@
+<section>
+  <h2><%=@question_category.title %></h2>
+  <% @question_category.questions.each do |question| %>
+  <%
+    exists=false
+    user_answers=[]
+    users_questions_id=0
+    @users_questions.each do |users_question|
+      if users_question.question_id==question.id
+        users_questions_id=users_question.id
+        user_answers=users_question.answers.ids
+        exists=true
+      end
+    end
+  %>
+  <% if exists %>
+  <article class="question panel panel-default panel-success">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%=question.title %> <%=link_to t(:edit),edit_users_question_path(users_questions_id),:class=>"btn btn-default" %></h3>
+    </div>
+    <div class="panel-body">
+      <ul>
+        <% question.answers.each do |answer| %>
+        <%
+          answered=false
+          if user_answers.include? answer.id
+            answered=true
+          end
+        %>
+        <li>
+          <% if answered %>
+          <b>
+          <% end %>
+          <%=answer.title %>
+          <% if answered %>
+          </b>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </article>
+  <% else %>
+  <article class="question panel panel-default panel-warning">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%=question.title %> <%=link_to t(:new),new_users_question_path(:question_id=>question.id),:class=>"btn btn-primary" %><h3>
+    </div>
+    <div class="panel-body">
+      <p class="red"><%=t(:no_answer) %></p>
+  </div>
+  </article>
+  <% end %>
+  <% end %>
+  <%= link_to t(:link_list), root_path %>
+</section>

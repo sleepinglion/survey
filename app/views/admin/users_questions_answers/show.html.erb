@@ -1,0 +1,26 @@
+<section class="sl_show">
+	<p>
+		<b><%=t(:label_title) %></b>
+		<%=@users_answer.title %>
+	</p>
+	<p>
+		<b><%=t(:label_user_count) %></b>
+		<%=@users_answer.users_count %>
+	</p>
+	<p>
+		<b><%=t(:label_flag) %></b>
+		<%=raw flagToString(@users_answer.enable) %>
+	</p>
+	<p>
+		<b><%=t(:label_created_at) %></b>
+		<%= @users_answer.created_at %>
+	</p>
+	<p>
+		<b><%=t(:label_updated_at) %></b>
+		<%= @users_answer.created_at %>
+	</p>
+</section>
+<% if can? :update, @users_answer %>
+<%= link_to t(:link_edit), edit_admin_users_answer_path(@users_answer) %> |
+<% end %>
+<%= link_to t(:link_list), admin_users_answers_path %>

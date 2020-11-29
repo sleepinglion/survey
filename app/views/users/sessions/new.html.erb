@@ -1,0 +1,41 @@
+<%
+	question_category_female=QuestionCategory.where(:female_only=>true)
+	male_total_question=Question.where(:enable=>true).where.not(:question_category_id=>question_category_female.ids).count
+	female_total_question=Question.where(:enable=>true).count
+%>
+<article id="survey_info">
+	<h3>설문에 참여해 주셔서 대단히 감사합니다.</h3>
+	<p>본 설문조사는 (남: <%=male_total_question %> ,여: <%=female_total_question %>)문항으로 이루어져 있으며<br />
+	더욱 정확하고 신뢰 있는정보를 도출하기 위해 필요한 자료입니다.<br />
+	가능하면 성실하게 답변해주시기 바랍니다.<br />
+	<span class="imp">모든 문항에는 최소 한번 이상의 표시를 반드시 하셔야 합니다.</span></p>
+</article>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:html => {:class=>"form-horizontal",:id=>"sl_login_form",:role=>"form"} ) do |f| %>
+	<div class="form-group">
+		<label for="user_login_id" class="col-sm-4 control-label"><%=t(:label_login_id) %></label>
+		<div class="col-sm-8">
+			<%= f.text_field :login_id, :autofocus => true, :class=>"form-control input-lg",:required=>"required", :placeholder=>t(:login_p_id) %>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="user_password" class="col-sm-4 control-label"><%=t(:label_password) %></label>
+		<div class="col-sm-8">
+			<%= f.password_field :password,:class=>"form-control input-lg",:required=>"required", :placeholder=>t(:login_p_password) %>
+		</div>
+	</div>
+	<!-- <div class="form-group">
+		<div class="col-sm-offset-4 col-sm-8">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" name="remember_me" id="remember_me">
+					<%= t(:remember_me) %>
+				</label>
+			</div>
+		</div>
+	</div> -->
+	<div class="form-group">
+		<div class="col-sm-offset-4 col-sm-8">
+			<%=f.submit t(:login),:class=>"btn btn-lg btn-primary btn-block",:style=>"font-weight:bold" %>
+		</div>
+	</div>
+<% end %>

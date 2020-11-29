@@ -1,0 +1,66 @@
+<div class="row">
+	<h3 class="col-xs-12 col-sm-6"><%= @controller_name %> <%= actionNameChange controller.action_name %></h3>
+	<div class="col-xs-12 col-sm-6">
+
+	</div>
+</div>
+<div class="table-responsive">
+	<table class="table table-bordered table-striped">
+		<colgroup>
+			<col style="width:80px;" />
+			<col />
+			<col style="width:90px;" />
+			<col style="width:100px;" />
+			<% if can?(:update, LiveType) || can?(:delete, LiveType) %>
+			<col <%= raw manage_width(LiveType) %> />
+			<% end %>
+		</colgroup>
+		<thead>
+			<tr>
+				<th><%= t(:label_number) %></th>
+				<th><%= t(:label_title) %></th>
+				<th><%= t(:label_flag) %></th>
+				<th><%= t(:label_created_at) %></th>
+				<% if can?(:update, LiveType) || can?(:delete, LiveType) %>
+				<th><%= t(:label_manage) %></th>
+				<% end %>
+			</tr>
+		</thead>
+		<tbody>
+			<% unless @live_types.empty? %>
+			<% @live_types.each do |live_type| %>
+			<tr>
+				<td><%= link_to live_type.id,admin_live_type_path(live_type) %></td>
+				<td><%= link_to live_type.title,admin_live_type_path(live_type) %></td>
+				<td><%= raw flagToString(live_type.enable) %></td>
+				<td><%= live_type.created_at.to_date %></td>
+				<% if can?(:update, LiveType) || can?(:delete, LiveType) %>
+				<td> <% if can? :update, live_type %>
+				<%= link_to edit_admin_live_type_path(live_type),:class=>"btn btn-default" do %> <i class="glyphicon glyphicon-pencil"></i> <%= t(:link_edit) %>
+				<% end %>
+				<% end %>
+				<% if can? :delete, live_type %>
+				<%= link_to admin_live_type_path(live_type), :method => :delete, :data => { :confirm => t(:delete_confirm) },:class=>"btn btn-danger" do %> <i class="glyphicon glyphicon-trash"></i> <%= t(:link_delete) %>
+				<% end %>
+				<% end %> </td>
+				<% end %>
+			</tr>
+			<% end %>
+			<% else %>
+			<tr>
+				<td colspan="5"><%= t(:no_data)%></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<div class="row">
+	<div class="col-xs-6 col-sm-3 col-md2">
+		<% if can? :create, LiveType %>
+		<%= link_to new_admin_live_type_path,:class=>"btn btn-primary" do %>
+		<i class="glyphicon glyphicon-plus"></i> <%= t(:link_new) %>
+		<% end %>
+		<% end %>
+	</div>
+	<%= paginate @live_types %>
+</div>

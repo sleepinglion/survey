@@ -1,0 +1,137 @@
+@charset "utf-8";
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@font-face {
+    font-family: 'Nanum Gothic';
+    src: local('☺'),url(font-path('NanumGothic-Regular.eot?#iefix')) format('embedded-opentype'),url(font-path('NanumGothic-Regular.woff')) format('woff');
+}
+
+/* default */
+html,body {margin:0;padding:0;height: 100%;background:#eee;font-size:20px}
+body { font-family: "Nanum Gothic","나눔고딕","Malgun Gothic","맑은 고딕","굴림",gulim,"돋움",Dotum,Arial,Helvetica, sans-serif;color:#333}
+label {vertical-align:middle;cursor:pointer}
+a img {border:none}
+input {vertical-align:middle}
+fieldset {border:none}
+legend {display:none}
+a{color:#666;text-decoration:none;}
+a:active {color:red}
+a:hover{color:#333;text-decoration:underline;}
+a img {border:none}
+
+h1 {font-size :200%}
+h2 {font-size :160%}
+h3 {font-size :140%}
+h4,h5,h6 {font-size : 120%}
+
+/* Getting the new tags to behave */
+article, aside, audio, canvas, command, datalist, details, embed, figcaption, figure, footer, header, hgroup, keygen, meter, nav, output, progress, section, source, video {display:block;}
+mark, rp, rt, ruby, summary, time {display:inline;}
+
+/* layout */
+footer {clear:both;float:left;width:100%;margin:0;color:#666;text-align: center}
+footer div {margin:0px 0 0}
+#mom {clear:both;float:left;width:100%;padding:0}
+.sub_main {float:left;position:relative;width:100%;margin:0 auto;padding:30px 0}
+.page-header {float:left;width:100%}
+.page-header h2 {float:left;margin:0.7em 0 0;padding:0;font-weight:bold;color:#666}
+.page-header .breadcrumb  {float:right;margin:0}
+.alert-success {clear:both}
+#sl_ad {clear:both;margin-bottom:10px}
+#sl_tag_cloud .box_content {padding:0}
+#tags {float:left;width:100%}
+.css1 { font-size: 15px; color:orange}
+.css2 { font-size: 20px; color:#333}
+.css3 { font-size: 30px; color:blue; }
+.css4 { font-size: 45px; color:red;}
+.red {color:#eb008b !important}
+
+/* Common Class */
+.arial {font-family:Arial}
+.noneData {text-align:center}
+.clear{clear:both}
+.none{display:none}
+.number {font-family:Arial;letter-spacing:0}
+.wrapper {margin:0 auto;width:728px}
+.jumbotron {margin:30px 0}
+.page-header {border-bottom:1px solid #999}
+
+/* header */
+header {position:relative;color:#ccc;background:#333}
+header h1 {float:left;margin:0;padding:0;width:100%;text-align:center}
+header h1 a:active {color:red}
+header nav { position: relative; z-index: 999; margin:0; padding:0}
+header nav ul { float: right; margin: 1.5em 0 0 0; padding: 0}
+header nav li { float: left; list-style: none; margin: 0 0 0 20px}
+header nav ul.nav-pills > li + li {margin-left:20px}
+header nav a { float: left; color: #fff; font-size:1.3em; text-decoration: none}
+header nav ul li ul {position:absolute;display:none}
+header #top_menu {position:absolute;right:10px;top:5px;margin:0;padding:0;list-style:none;z-index:9999}
+header #top_menu li {float:left;margin:0 15px 0 0;padding:0}
+header a:hover {color:#fff}
+header a:visited {color:#fff}
+header a:active {color:red}
+footer {background:#333;color:#fff}
+footer a:hover {color:#fff}
+footer a:visited {color:#fff}
+footer a:active {color:red}
+#question h2 {color:#666;background:#ccc;border-radius:10px;font-size:20px;padding:20px}
+.question ul {margin:20px 0 40px;padding:0}
+.question li {margin:20px 0;padding:0}
+label.checked {color:red}
+article.question li {color:#666}
+article.question li b {color:#333}
+.sub_question,.custom_answer {margin:20px 0 30px;padding:0 20px 0 50px}
+#sl_login_form {margin-top:50px}
+ul.main_question {padding-left:30px}
+
+
+#survey_info {text-align:center;background:#ccc;border-radius:10px;padding:20px 10px}
+#survey_info p {line-height:160%}
+#survey_info .imp {color:red;font-weight:bold}
+
+.panel-heading h3.panel-title {font-size:24px;padding:7px 0}
+.panel-heading a {float:right}
+.panel-body ul {padding:0 6%;list-style:none}
+
+#question_count {position:absolute;left:0;width:100%;margin:0;background:#ccc;text-align:center;font-weight:bold;color:#666}
+
+@media all and (max-width: 768px) {
+  html,body {background:#ccc;font-size:16px}
+  header {height:30px;border-bottom:0;margin:0}
+  header h1 {margin:4px 0 0 15px;padding:0;font-size:20px;text-align:left}
+  header h1 a {float:left;background:none;text-indent:0;width:100%;font-weight:bold}
+  header h1 a:hover {text-decoration:none}
+  header h1 a:active {color:red}
+  #mom {float:left;clear:both;width:100%;margin:0}
+  #main {float:left;margin:0;padding:0;width:100%;padding:3%;border-radius:5px;background:#fff;}
+  .sub_main {clear:both;width:100%;padding-top:10px}
+  footer {border-radius:5px;width:100%;margin:3px 0 0;padding:5px}
+  footer address {margin:1px 0 0;font-size:14px}
+  #question_count {top:30px;padding:15px 0;font-size:16px}
+  .show_count .sub_main {padding:30px 0 30px}
+}
+
+@media all and (min-width: 769px) and (max-width: 1024px) {
+  header {height:50px;border-bottom:1px solid #e7e7e7}
+  header h1 {margin:8px 0 0;font-size:24px}
+  footer {height:30px;border-top:1px solid #e7e7e7}
+  footer address {margin:2px 0 0;font-size:16px}
+  #mom {margin:-50px 0 -30px;min-height:100%}
+  #main {padding-top:50px;padding-bottom:30px}
+  #question_count {top:50px;padding:15px 0;font-size:20px}
+  .show_count .sub_main {padding:50px 0 30px}
+}
+
+@media all and (min-width: 1025px) {
+  header {height:80px;border-bottom:1px solid #e7e7e7}
+  header h1 {margin:17px 0 0}
+  footer {height:40px;border-top:1px solid #e7e7e7}
+  footer address {margin:5px 0 0}
+  #mom {margin:-80px 0 -40px;min-height:100%}
+  #main {padding-top:80px;padding-bottom:40px}
+  #question_count {top:80px;padding:30px 0}
+  .show_count .sub_main {padding:100px 0 30px}
+}

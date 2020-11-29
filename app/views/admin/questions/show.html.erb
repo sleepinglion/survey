@@ -1,0 +1,30 @@
+<section class="sl_show">
+	<p>
+		<b><%=t(:label_title) %></b>
+		<%=@question.title %>
+	</p>
+	<p>
+		<b><%=t(:label_answer_count) %></b>
+		<%=@question.answers_count %>
+	</p>
+	<p>
+		<b><%=t(:label_multi_answer) %></b>
+		<%= enableToString(@question.multi_answer) %>
+	</p>
+	<p>
+		<b><%=t(:label_flag) %></b>
+		<%=raw flagToString(@question.enable) %>
+	</p>
+	<p>
+		<b><%=t(:label_created_at) %></b>
+		<%= @question.created_at %>
+	</p>
+	<p>
+		<b><%=t(:label_updated_at) %></b>
+		<%= @question.created_at %>
+	</p>
+</section>
+<% if can? :update, @question %>
+<%= link_to t(:link_edit), edit_admin_question_path(@question) %> |
+<% end %>
+<%= link_to t(:link_list), admin_questions_path %>

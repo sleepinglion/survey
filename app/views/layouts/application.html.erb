@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title><%=t(:application_name)%></title>
+<meta name="description" content="<%=t(:application_name)%>" />
+<meta name="author" content="Sleeping-Lion" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<%= stylesheet_link_tag "application", :media=>"all", "data-turbolinks-track" => true %>
+<%= favicon_link_tag 'favicon.ico' %>
+<%= csrf_meta_tags %>
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<![endif]-->
+</head>
+<body>
+	<%= render :partial => 'layouts/header' %>
+	<div id="mom" class="<% if @total_question.present? && @total_answered.present?  %>show_count<% end %>">
+		<% if @total_question.present? && @total_answered.present?  %>
+		<% if @total_question==@total_answered %>
+		<h3 id="question_count">감사합니다 모든 문항(<%=@total_question %>)에 답변하셨습니다</h3>
+		<% else %>
+		<h3 id="question_count">총 <%=@total_question %>개의 문항 중 <b class="red"><%=@total_answered %></b>개의 문항에 답변하셨습니다</h3>
+		<% end %>
+		<% end %>
+		<div id="main" class="container">
+			<div class="sub_main">
+
+			<!--	<% if notice %>
+				<%= render :partial => 'layouts/notice',:locals=>{:notice=>notice} %>
+				<% end %> -->
+				<% if alert %>
+				<%= render :partial => 'layouts/alert',:locals=>{:alert=>alert} %>
+				<% end %>
+			<%= yield %>
+			</div>
+		</div>
+	</div>
+	<%= render :partial => 'layouts/footer' %>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"></div>
+	<%= javascript_include_tag :application %>
+</body>
+</html>

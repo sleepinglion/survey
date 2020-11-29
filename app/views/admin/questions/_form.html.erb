@@ -1,0 +1,34 @@
+<%= form_for [:admin,@question], :html => { :multipart => true } do |f| %>
+<% if @question.errors.any? %>
+<div id="error_explanation" class="alert alert-danger">
+	<a href="#" class="close" data-dismiss="alert">&times;</a>
+	<h2><%= pluralize(@question.errors.count, "error") %> prohibited this sponsor from being saved:</h2>
+	<ul>
+		<% @question.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+<div class="form-group">
+	<%= f.label :question_category_id %>
+	<%= f.select :question_category_id,options_from_collection_for_select(QuestionCategory.where(:enable=>true).all, 'id', 'title',@question.question_category_id),{},{:class=>"form-control"} %>
+</div>
+<div class="form-group">
+	<%= f.label :title %>
+	<%= f.text_field :title, :class => "form-control", :autofocus => true %>
+</div>
+<div class="form-group">
+	<%= f.label :multi_answer %>
+	<%= f.check_box :multi_answer %>
+</div>
+<div class="form-group">
+	<%= f.label :enable %>
+	<%= f.check_box :enable %>
+</div>
+<div class="form-group actions">
+	<%= f.submit :class=>"btn btn-primary" %>
+</div>
+<% end %>

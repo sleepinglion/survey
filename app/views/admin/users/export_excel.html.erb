@@ -1,0 +1,64 @@
+<table border="1" style="width:6000px">
+  <thead>
+    <tr>
+      <th rowspan="2">참여자 관리번호</th>
+      <th colspan="3">참여자 기초정보</th>
+      <th colspan="4">참여자 배경</th>
+      <% @questions.each do |question| %>
+      <th colspan="<%=question.answers_count %>"><%=question.title %></th>
+      <% end %>
+    </tr>
+    <tr>
+      <th>생년월일</th>
+      <th>나이</th>
+      <th>성별</th>
+      <th>동거형태</th>
+      <th>직업</th>
+      <th>교육정도</th>
+      <th>가족관계</th>
+      <% @questions.each do |questions| %>
+      <% questions.answers.each do |answer| %>
+      <th><%=answer.title %></th>
+      <% end %>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% unless @users.empty? %>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%=user.login_id %></td>
+      <td><%=user.birthday %></td>
+      <td><%=Time.current.year.to_i-user.birthday.strftime("%Y").to_i %></td>
+      <td><%=sexToString(user.sex) %></td>
+      <td><%=user.live_type.title %></td>
+      <td><%=user.job %></td>
+      <td><%=user.education.title %></td>
+      <td>
+        <% if user.users_families_count.zero? %>
+없음
+        <% else %>
+        <% user.users_families.each do |users_family| %>
+        <%=users_family.family.family_category.title %><%=users_family.family.member %>
+        <% end %>
+        <% end %>
+      </td>
+      <% @questions.each do |question| %>
+      <% question.answers.each do |answer| %>
+      <td style="text-align:center">
+        <% user.users_questions.each do |users_question| %>
+        <% next unless users_question.question_id==question.id %>
+        <% users_question.users_questions_answers.each do |users_answers| %>
+        <% if users_answers.answer_id==answer.id %>
+        O
+        <% end %>
+        <% end %>
+        <% end %>
+      </td>
+      <% end %>
+      <% end %>
+    </tr>
+    <% end %>
+    <% end %>
+  <tbody>
+</table>

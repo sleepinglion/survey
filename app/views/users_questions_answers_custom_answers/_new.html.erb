@@ -1,0 +1,12 @@
+<%= c.fields_for :users_questions_answers_custom_answers do |d| %>
+<div class="custom_answer">
+<ul>
+  <li>
+    <label>
+      <%=d.hidden_field :enable,:value=>true %>
+      <%=d.text_field :title %>
+    </label>
+  </li>
+</ul>
+</div>
+<% end %>

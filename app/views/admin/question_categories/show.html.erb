@@ -1,0 +1,18 @@
+<div class="sl_show">
+	<p>
+		<b><%=t(:label_title) %></b>
+		<%= @question_category.title %>
+	</p>
+	<p>
+  	<b><%=t(:label_created_at) %></b>
+  	<%= @question_category.created_at %>
+  </p>
+  <p>
+  	<b><%=t(:label_updated_at) %></b>
+  	<%= @question_category.created_at %>
+  </p>
+</div>
+<% if can? :update, @question_category %>
+<%= link_to t(:link_edit), edit_admin_question_category_path(@question_category) %> |
+<% end %>
+<%= link_to t(:link_list), admin_question_categories_path %>

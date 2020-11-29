@@ -1,0 +1,124 @@
+<div class="row">
+	<h3 class="col-xs-12"><%= @controller_name %> <%= actionNameChange controller.action_name %></h3>
+
+</div>
+<div class="table-responsive">
+	<table id="users_table" class="table table-bordered table-striped">
+		<colgroup>
+			<col style="width:110px;" />
+			<col />
+			<col />
+			<col />
+			<col />
+			<col />
+			<col />
+			<col style="width:110px;" />
+			<col style="width:110px;" />
+			<col style="width:100px;" />
+			<% if can?(:update, User) || can?(:delete, User) %>
+			<col <%= raw manage_width(User) %> />
+			<% end %>
+		</colgroup>
+		<thead>
+			<tr>
+				<th><label><input type="checkbox" class="check_all" style="vertical-align:middle" /> <span style="vertical-align:middle">전체선택</span></label></th>
+				<th><%= t(:label_name)%></th>
+				<th><%= t(:label_birthday) %></th>
+				<th><%= t(:label_job) %></th>
+				<th><%= t(:label_education) %></th>
+				<th><%= t(:label_live_type) %></th>
+				<th><%= t(:label_family) %></th>
+				<th><%= t(:label_users_question_count) %></th>
+				<th><%= t(:label_flag)%></th>
+				<th><%= t(:label_created_at)%></th>
+				<% if can? :update, User %>
+				<th><%= t(:label_manage)%></th>
+				<% end %>
+			</tr>
+		</thead>
+		<tbody>
+			<% unless @users.empty? %>
+			<% @users.each_with_index do |user,index| %>
+			<tr>
+				<td><label><input type="checkbox" value="<%=user.id %>"  style="vertical-align:middle" /> <span style="vertical-align:middle"><%=virtual_number(@users_all_count,index) %><span></label></td>
+				<td>
+					<% if user.enable %>
+					<%= link_to user.name,admin_user_path(user) %>
+					<% else %>
+					<strike><%= link_to user.name,admin_user_path(user) %></strike>
+					<% end %>
+				</td>
+				<td><%= user.birthday %></td>
+				<td>
+					<% if user.job.present? %>
+					<%=link_to user.job, admin_user_path(user) %>
+					<% end %>
+				</td>
+				<td>
+					<% if user.education.present? %>
+					<%=link_to user.education.title, admin_user_path(user) %>
+					<% end %>
+				</td>
+				<td>
+					<% if user.live_type.present? %>
+					<%=link_to user.live_type.title, admin_user_path(user) %>
+					<% end %>
+				</td>
+				<td>
+					<% unless user.users_families_count.zero? %>
+					<% user.families.each_with_index do |family,index| %>
+					<% unless index.zero? %>,<% end %>
+					<%=link_to family.family_category.title, admin_user_path(user) %> : <%=link_to family.member, admin_user_path(user) %>
+					<% end %>
+					<% else %>
+					<%=t(:no_data) %>
+					<% end %>
+				</td>
+				<td><%=link_to user.users_questions_count,admin_user_path(user) %></td>
+				<td><%= raw flagToString(user.enable) %></td>
+				<td><%= user.created_at.to_date %></td>
+				<% if can?(:update, User) || can?(:delete, User) %>
+				<td> <% if can? :update, User %>
+				<%= link_to edit_admin_user_path(user),:class=>"btn btn-default" do %> <i class="glyphicon glyphicon-pencil"></i> <%= t(:link_edit) %>
+				<% end %>
+				<% end %>
+				<% if can? :delete, User %>
+				<%= link_to admin_user_path(user), :method => :delete, :data => { :confirm => t(:delete_confirm) },:class=>"btn btn-danger" do %> <i class="glyphicon glyphicon-trash"></i> <%= t(:link_delete) %>
+				<% end %>
+				<% end %> </td>
+				<% end %>
+			</tr>
+			<% end %>
+			<% else %>
+			<tr>
+				<td colspan="8"><%= t(:no_data)%></td>
+			</tr>
+			<% end %>
+		</tbody>
+		<tfoot>
+ 			<tr>
+					<td><label><input type="checkbox" class="check_all" style="vertical-align:middle" /> <span style="vertical-align:middle">전체선택</span></label></td>
+					<td colspan="9">
+
+					</td>
+					<td>
+						<% if can?(:create, Operator) %>
+						<%=form_tag destroy_multiple_admin_users_path,:method=>'delete',:id=>'multi_delete_form',:class=>"form-inline" do %>
+						<%=submit_tag t(:delete_all),{:class=>"btn btn-danger",:style=>"width:100%"} %>
+						<% end %>
+						<% end %>
+					</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+<div class="row">
+	<div class="col-xs-6 col-sm-3 col-md2">
+		<% if can? :create, User %>
+		<%= link_to new_admin_user_path,:class=>"btn btn-primary" do %>
+		<i class="glyphicon glyphicon-plus"></i> <%= t(:link_new) %>
+		<% end %>
+		<% end %>
+	</div>
+	<%= paginate @users %>
+</div>

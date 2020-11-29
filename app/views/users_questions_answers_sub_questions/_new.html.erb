@@ -1,0 +1,60 @@
+<%= c.fields_for :users_questions_answers_sub_questions do |d| %>
+<% unless question.title.nil? %>
+<div class="sub_question">
+<h4><%=question.title %></h4>
+<% end %>
+  <%=d.hidden_field :sub_question_id,:value=>question.id %>
+
+<ul>
+  <% if question.multi_answer %>
+
+  <% question.sub_answers.each do |sub_answer| %>
+  <%= d.fields_for :users_questions_answers_sub_questions_sub_answers do |e| %>
+  <%
+  if sub_answer.only?
+    html={:class=>"sub_answer only"}
+  else
+    html={:class=>"sub_answer"}
+  end
+
+  if sub_answer.default?
+    html[:checked=>"checked",:class=>"checked"]
+  end
+  %>
+  <li class="checkbox">
+    <label>
+     <%=e.check_box :sub_answer_id,html,sub_answer.id,false %><%=raw sub_answer.answer_text %>
+    </label>
+    <% if sub_answer.has_custom? %>
+      <%= render :partial=>'/users_questions_answers_sub_questions_sub_answers_custom_answers/new',:locals=>{:question=>question,:c=>e} %>
+    <% end %>
+  </li>
+  <% end %>
+  <% end %>
+
+  <% else %>
+
+  <%= d.fields_for :users_questions_answers_sub_questions_sub_answers do |e| %>
+  <% question.sub_answers.each do |sub_answer| %>
+  <%
+  if sub_answer.default?
+    html={:checked=>true,:class=>"sub_answer"}
+  else
+    html={:class=>"sub_answer"}
+  end
+  %>
+  <li class="radio">
+    <label>
+     <%=e.radio_button :sub_answer_id,sub_answer.id,html %><%=raw sub_answer.answer_text %>
+    </label>
+    <% if sub_answer.has_custom? %>
+      <%= render :partial=>'/users_questions_answers_sub_questions_sub_answers_custom_answers/new',:locals=>{:question=>question,:c=>e} %>
+    <% end %>
+  </li>
+  <% end %>
+  <% end %>
+
+  <% end %>
+</ul>
+</div>
+<% end %>

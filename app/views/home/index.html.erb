@@ -1,0 +1,19 @@
+<section>
+  <article class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>현재까지 답변상황</h2>
+    </div>
+      <div class="list-group">
+      <% @question_categories.each do |question_category| %>
+        <%=link_to question_category_path(question_category),{:class=>"list-group-item"} do %>
+          <%=question_category.title %><span class="badge">(<%=t(:answerd) %>: <%= UsersQuestion.where(:user_id=>current_user.id,:question_id=>question_category.questions.ids).count  %> <%=t(:quantity) %> / <%=t(:all) %> : <%=question_category.questions.count %> <%=t(:quantity) %>)</span>
+        <% end %>
+      <% end %>
+    </div>
+  </article>
+  <% if @next_question_id %>
+  <%=link_to t(:resume_survey),question_path(@next_question_id),:class=>"btn btn-lg btn-primary",:style=>"font-weight:bold" %>
+  <% else %>
+  <%=link_to t(:logout),destroy_user_session_path,:class=>"btn btn-lg btn-default",:style=>"font-weight:bold" %>
+  <% end %>
+</section>

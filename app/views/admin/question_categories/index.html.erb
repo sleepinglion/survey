@@ -1,0 +1,69 @@
+<div class="row">
+	<h3 class="col-xs-12 col-sm-6"><%= @controller_name %> <%= actionNameChange controller.action_name %></h3>
+	<div class="col-xs-12 col-sm-6">
+
+	</div>
+</div>
+<div class="table-responsive">
+	<table class="table table-bordered table-striped">
+		<colgroup>
+			<col style="width:80px;" />
+			<col />
+			<col />
+			<col style="width:90px;" />
+			<col style="width:100px;" />
+			<% if can?(:update, QuestionCategory) || can?(:delete, QuestionCategory) %>
+			<col <%= raw manage_width(QuestionCategory) %> />
+			<% end %>
+		</colgroup>
+		<thead>
+			<tr>
+				<th><%= t(:label_number) %></th>
+				<th><%= t(:label_title) %></th>
+				<th><%= t(:label_questions_count) %></th>
+				<th><%= t(:label_flag) %></th>
+				<th><%= t(:label_created_at) %></th>
+				<% if can?(:update, QuestionCategory) || can?(:delete, QuestionCategory) %>
+				<th><%= t(:label_manage) %></th>
+				<% end %>
+			</tr>
+		</thead>
+		<tbody>
+			<% unless @question_categories.empty? %>
+			<% @question_categories.each do |question_category| %>
+			<tr>
+				<td><%= link_to question_category.id,admin_question_category_path(question_category) %></td>
+				<td><%= link_to question_category.title,admin_question_category_path(question_category) %></td>
+				<td><%=question_category.questions_count %></td>
+				<td><%= raw flagToString(question_category.enable) %></td>
+				<td><%= question_category.created_at.to_date %></td>
+				<% if can?(:update, QuestionCategory) || can?(:delete, QuestionCategory) %>
+				<td> <% if can? :update, question_category %>
+				<%= link_to edit_admin_question_category_path(question_category),:class=>"btn btn-default" do %> <i class="glyphicon glyphicon-pencil"></i> <%= t(:link_edit) %>
+				<% end %>
+				<% end %>
+				<% if can? :delete, question_category %>
+				<%= link_to admin_question_category_path(question_category), :method => :delete, :data => { :confirm => t(:delete_cascade_confirm) },:class=>"btn btn-danger" do %> <i class="glyphicon glyphicon-trash"></i> <%= t(:link_delete) %>
+				<% end %>
+				<% end %> </td>
+				<% end %>
+			</tr>
+			<% end %>
+			<% else %>
+			<tr>
+				<td colspan="5"><%= t(:no_data)%></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<div class="row">
+	<div class="col-xs-6 col-sm-3 col-md2">
+		<% if can? :create, QuestionCategory %>
+		<%= link_to new_admin_question_category_path,:class=>"btn btn-primary" do %>
+		<i class="glyphicon glyphicon-plus"></i> <%= t(:link_new) %>
+		<% end %>
+		<% end %>
+	</div>
+	<%= paginate @question_categories %>
+</div>

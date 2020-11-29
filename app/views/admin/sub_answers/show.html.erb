@@ -1,0 +1,22 @@
+<section class="sl_show">
+	<p>
+		<b><%=t(:label_title) %></b>
+		<%=@sub_answer.title %>
+	</p>
+	<p>
+		<b><%=t(:label_flag) %></b>
+		<%=raw flagToString(@sub_answer.enable) %>
+	</p>
+	<p>
+		<b><%=t(:label_created_at) %></b>
+		<%= @sub_answer.created_at %>
+	</p>
+	<p>
+		<b><%=t(:label_updated_at) %></b>
+		<%= @sub_answer.created_at %>
+	</p>
+</section>
+<% if can? :update, @sub_answer %>
+<%= link_to t(:link_edit), edit_admin_sub_answer_path(@sub_answer) %> |
+<% end %>
+<%= link_to t(:link_list), admin_sub_answers_path %>

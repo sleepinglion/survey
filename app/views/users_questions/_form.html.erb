@@ -1,0 +1,78 @@
+<%= form_for @users_question,:html=>{:class=>"question"} do |f| %>
+  <h3><%=question.id %>. <%=question.title %></h3>
+  <%=f.hidden_field :question_id,:value=>question.id %>
+
+  <% unless question.question_descriptions.empty? %>
+  <% question.question_descriptions.each do |question_descriptions| %>
+  <div class="well well-lg">
+    <%=raw question_descriptions.description %>
+  </div>
+  <% end %>
+  <% end %>
+
+  <% unless question.answers.empty? %>
+  <ul class="main_question">
+    <% if question.multi_answer %>
+
+    <% question.answers.each_with_index do |answer,index| %>
+    <%= f.fields_for :users_questions_answers do |c| %>
+    <li class="checkbox">
+      <%
+      if answer.only?
+        html={:class=>"main_answer only"}
+      else
+        html={:class=>"main_answer"}
+      end
+
+      if answer.default?
+        html[:checked=>"checked",:class=>"checked"]
+      end
+      %>
+      <label>
+       <%=c.check_box :answer_id,html,answer.id,false %><%=raw answer.answer_text %>
+     </label>
+      <% unless answer.sub_questions.empty? %>
+      <% answer.sub_questions.each do |sub_question| %>
+        <%= render :partial=>'/users_questions_answers_sub_questions/new',:locals=>{:question=>sub_question,:c=>c} %>
+      <% end %>
+      <% end %>
+      <% if answer.has_custom? %>
+        <%= render :partial=>'/users_questions_answers_custom_answers/new',:locals=>{:question=>question,:c=>c} %>
+      <% end %>
+    </li>
+    <% end %>
+    <% end %>
+
+    <% else %>
+
+
+    <%= f.fields_for :users_questions_answers do |c| %>
+    <% question.answers.each do |answer| %>
+    <%
+    if answer.default?
+      html={:checked=>true,:class=>"main_answer"}
+    else
+      html={:class=>"main_answer"}
+    end
+    %>
+    <li class="radio">
+      <label>
+       <%=c.radio_button :answer_id,answer.id,html %><%=raw answer.answer_text %>
+      </label>
+      <% unless answer.sub_questions.empty? %>
+      <% answer.sub_questions.each do |sub_question| %>
+        <%= render :partial=>'/users_questions_answers_sub_questions/new',:locals=>{:question=>sub_question,:c=>c} %>
+      <% end %>
+      <% end %>
+      <% if answer.has_custom? %>
+        <%= render :partial=>'/users_questions_answers_custom_answers/new',:locals=>{:question=>question,:c=>c} %>
+      <% end %>
+    </li>
+    <% end %>
+    <% end %>
+
+    <% end %>
+  </ul>
+  <% end %>
+  <%= f.submit raw(t(:submit_survey)),:class=>"btn btn-lg btn-block btn-primary",:style=>"font-weight:bold" %>
+  <% end %>

@@ -1,0 +1,4 @@
+<section id="question">
+  <h2><%=@question.question_category.title %> (<%=t(:answerd) %>: <%=@question.question_category.users_questions.count %> <%=t(:quantity) %> / <%=t(:all) %> : <%=@question.question_category.questions.count %> <%=t(:quantity) %>)</h2>
+  <%= render :partial=>'/users_questions/form',:locals=>{:question=>@question} %>
+</section>

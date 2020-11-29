@@ -1,0 +1,30 @@
+<%= form_for [:admin,@users_questions_answer] do |f| %>
+<% if @users_questions_answer.errors.any? %>
+<div id="error_explanation" class="alert alert-danger">
+	<a href="#" class="close" data-dismiss="alert">&times;</a>
+	<h2><%= pluralize(@users_questions_answer.errors.count, "error") %> prohibited this sponsor from being saved:</h2>
+	<ul>
+		<% @users_questions_answer.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+<div class="form-group">
+	<%= f.label :users_question_id %>
+	<%= f.select :users_question_id,options_from_collection_for_select(UsersQuestion.where(:enable=>true).all, 'id', 'id',@users_questions_answer.users_question_id),{},{:class=>"form-control"} %>
+</div>
+<div class="form-group">
+	<%= f.label :answer_id %>
+	<%= f.select :answer_id,options_from_collection_for_select(Answer.where(:enable=>true).all, 'id', 'title',@users_questions_answer.answer_id),{},{:class=>"form-control"} %>
+</div>
+<div class="form-group">
+	<%= f.label :enable %>
+	<%= f.check_box :enable %>
+</div>
+<div class="form-group actions">
+	<%= f.submit :class=>"btn btn-primary" %>
+</div>
+<% end %>

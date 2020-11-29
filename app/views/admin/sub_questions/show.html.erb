@@ -1,0 +1,26 @@
+<section class="sl_show">
+	<p>
+		<b><%=t(:label_title) %></b>
+		<%=@sub_question.title %>
+	</p>
+	<p>
+		<b><%=t(:label_sub_answers_count) %></b>
+		<%=@sub_question.sub_answers_count %>
+	</p>
+	<p>
+		<b><%=t(:label_flag) %></b>
+		<%=raw flagToString(@sub_question.enable) %>
+	</p>
+	<p>
+		<b><%=t(:label_created_at) %></b>
+		<%= @sub_question.created_at %>
+	</p>
+	<p>
+		<b><%=t(:label_updated_at) %></b>
+		<%= @sub_question.created_at %>
+	</p>
+</section>
+<% if can? :update, @sub_question %>
+<%= link_to t(:link_edit), edit_admin_sub_question_path(@sub_question) %> |
+<% end %>
+<%= link_to t(:link_list), admin_sub_questions_path %>

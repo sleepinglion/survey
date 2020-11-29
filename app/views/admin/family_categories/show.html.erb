@@ -1,0 +1,18 @@
+<div class="sl_show">
+	<p>
+		<b><%=t(:label_title) %></b>
+		<%= @family_category.title %>
+	</p>
+	<p>
+  	<b><%=t(:label_created_at) %></b>
+  	<%= @family_category.created_at %>
+  </p>
+  <p>
+  	<b><%=t(:label_updated_at) %></b>
+  	<%= @family_category.created_at %>
+  </p>
+</div>
+<% if can? :update, @family_category %>
+<%= link_to t(:link_edit), edit_admin_family_category_path(@family_category) %> |
+<% end %>
+<%= link_to t(:link_list), admin_family_categories_path %>

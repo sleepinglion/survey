@@ -1,0 +1,18 @@
+<div class="sl_show">
+	<p>
+		<b><%=t(:label_title) %></b>
+		<%= @live_type.title %>
+	</p>
+	<p>
+  	<b><%=t(:label_created_at) %></b>
+  	<%= @live_type.created_at %>
+  </p>
+  <p>
+  	<b><%=t(:label_updated_at) %></b>
+  	<%= @live_type.created_at %>
+  </p>
+</div>
+<% if can? :update, @live_type %>
+<%= link_to t(:link_edit), edit_admin_live_type_path(@live_type) %> |
+<% end %>
+<%= link_to t(:link_list), admin_live_types_path %>

@@ -1,0 +1,17 @@
+<header>
+	<div class="container">
+		<div class="row">
+			<h1><%=link_to t(:application_name),root_path %></h1>
+			<ul id="top_menu">
+			<% if(current_user) %>
+				<li>
+					<% if current_user.photo?  %>
+					<%=image_tag current_user.photo.small_thumb %>
+					<% end %>
+					<%= link_to edit_user_registration_path do %><%=current_user.name %><% end %> <%=t(:welcome) %></li>
+				<li><%= link_to t(:logout),destroy_user_session_path %></li>
+			<% end %>
+			</ul>
+		</div>
+	</div>
+</header>

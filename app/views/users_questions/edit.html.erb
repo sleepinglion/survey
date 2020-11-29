@@ -1,0 +1,33 @@
+<%= form_for @users_question,:html=>{:class=>"question"} do |f| %>
+  <h3><%=@question.id %>. <%=@question.title %></h3>
+  <% unless @question.answers.empty? %>
+  <ul>
+    <% if @question.multi_answer %>
+
+    <%= f.collection_check_boxes :answer_ids, @question.answers, :id, :answer_text, :include_hidden=>false  do |b| %>
+    <li class="checkbox">
+      <label>
+       <%=b.check_box %><%=raw b.text %>
+      </label>
+    </li>
+    <% end %>
+
+    <% else %>
+
+      <%= f.fields_for :users_questions_answers do |c| %>
+      <%= c.collection_radio_buttons :answer_id, @question.answers, :id, :title, :include_hidden=>false  do |b| %>
+      <li class="radio">
+        <label class="input-lg">
+         <%=b.radio_button %><%=raw b.text %>
+        </label>
+      </li>
+      <% end %>
+      <% end %>
+
+    <% end %>
+  </ul>
+  <% end %>
+  <%= f.submit raw(t(:edit_survey)),:class=>"btn btn-lg btn-block btn-primary",:style=>"font-weight:bold" %>
+  <% end %>
+
+<%= link_to t(:link_list), question_category_path(@question.question_category),:class=>'pull-right' %>
