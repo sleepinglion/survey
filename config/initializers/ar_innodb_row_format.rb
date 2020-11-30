@@ -10,7 +10,6 @@ ActiveSupport.on_load :active_record do
          yield td if block_given?
         end
       end
-      alias_method_chain :create_table, :innodb_row_format
     end
   end
 end
