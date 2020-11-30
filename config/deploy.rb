@@ -5,7 +5,6 @@ set :branch, 'master'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-#set :deploy_to, '/BiO/Serve/Httpd/Survey'
 set :deploy_to, '/home/deploy/survey'
 
 # Default value for :scm is :git
@@ -28,7 +27,7 @@ set :pty, true
 append :linked_files, '.env','config/database.yml'
 
 # Default value for linked_dirs is []
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/uploads', 'public/ckeditor', 'public/pdfs', 'public/zips'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/uploads'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
