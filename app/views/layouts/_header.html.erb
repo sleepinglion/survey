@@ -6,7 +6,7 @@
 			<% if(current_user) %>
 				<li>
 					<% if current_user.photo?  %>
-					<%=image_tag current_user.photo.small_thumb %>
+					<%=image_tag current_user.photo.small_thumb.url %>
 					<% end %>
 					<%= link_to edit_user_registration_path do %><%=current_user.name %><% end %> <%=t(:welcome) %></li>
 				<li><%= link_to t(:logout),destroy_user_session_path %></li>
