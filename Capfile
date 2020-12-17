@@ -31,7 +31,7 @@ install_plugin Capistrano::SCM::Git
 # require "capistrano/chruby"
 require "capistrano/bundler"
 require "capistrano/rails/migrations"
-require "capistrano/rails/assets"
+# require "capistrano/rails/assets"
 require "capistrano/passenger"
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
