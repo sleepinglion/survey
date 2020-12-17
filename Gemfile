@@ -30,7 +30,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use CoffeeScript for .coffee assets and views
 # See https://github.com/rails/execjs#readme for more supported runtimes
-#gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
+gem 'uglifier'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -80,8 +81,6 @@ group :test do
 end
 
 group :production do
-  gem 'therubyracer'
-  gem 'uglifier'
   gem 'asset_sync','~> 2.8'
   gem 'fog-azure-rm'
   gem 'mysql2'
