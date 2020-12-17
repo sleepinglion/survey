@@ -467,6 +467,8 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.8)
       thread_safe (~> 0.1)
+    uglifier (4.2.0)
+      execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
@@ -549,6 +551,7 @@ DEPENDENCIES
   sprockets (~> 3.0)
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
+  uglifier
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
