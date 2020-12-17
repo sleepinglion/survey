@@ -47,7 +47,6 @@ gem 'meta-tags'
 gem 'gretel'
 gem 'globalize'
 gem 'activemodel-serializers-xml'
-gem 'uglifier'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -81,6 +80,8 @@ group :test do
 end
 
 group :production do
+  gem 'therubyracer'
+  gem 'uglifier'
   gem 'asset_sync','~> 2.8'
   gem 'fog-azure-rm'
   gem 'mysql2'
