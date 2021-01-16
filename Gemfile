@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-#ruby '2.7.1'
+# ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
@@ -28,26 +28,18 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-# Use CoffeeScript for .coffee assets and views
-# See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
-gem 'uglifier'
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-gem 'sprockets', '~>3.0'
-gem 'bootstrap-sass'
-gem 'kaminari'
-gem 'carrierwave'
+gem 'bootstrap', '~> 4.5.3'
+gem 'sprockets', '~> 3.7.2'
 gem 'devise'
-gem 'mini_magick'
 gem 'cancancan'
-gem 'ckeditor'
-gem 'impressionist'
+gem 'kaminari'
+gem 'carrierwave', '~> 2.0'
+gem 'mini_magick'
+gem 'sitemap_generator'
 gem 'meta-tags'
 gem 'gretel'
+gem 'i18n-js'
 gem 'globalize'
-gem 'activemodel-serializers-xml'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -63,7 +55,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   # Capistrano
-  gem 'capistrano', '~> 3.0'
+  gem 'capistrano'
+  gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
   gem 'capistrano-passenger'
   gem 'capistrano-rails'
@@ -75,14 +68,11 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
-  gem 'rails_best_practices'
-  gem 'rubocop'
-  gem 'rubycritic'
 end
 
 group :production do
-  gem 'asset_sync','~> 2.8'
-  gem 'fog-azure-rm'
+  gem 'asset_sync'
+  gem 'fog-azure-rm', github: 'sleepinglion/fog-azure-rm'
   gem 'mysql2'
   gem 'redis'
   gem 'redis-store',github: 'redis-store/redis-store'
@@ -90,10 +80,13 @@ group :production do
   gem 'recaptcha', :require => 'recaptcha/rails'
   gem 'rails-letsencrypt'
 
+  gem 'mini_racer', platforms: :ruby
+  gem 'execjs'
+
   # Redis Cache
   gem 'redis-rails'
   gem 'redis-rack-cache'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-#gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

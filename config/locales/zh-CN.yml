@@ -1,5 +1,5 @@
 zh-CN:
-  application_name : 'SL Survey'
+  service_name : 'SL Survey'
   meta_description : ''
   meta_description_intro : ''
   meta_description_supports : ''
@@ -13,6 +13,7 @@ zh-CN:
   chineses : '汉语'
   english : '英语'
 
+  jedearoweb : 'jedearoweb'
   hello : '안녕하세요'
   welcome : '님 환영합니다'
   admin_profile : '내정보 수정'

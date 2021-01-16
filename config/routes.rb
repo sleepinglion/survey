@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
     root :to => 'home#index'
-    mount Ckeditor::Engine => 'ckeditor'
 
     if Rails.env.production?
       mount LetsEncrypt::Engine => '/.well-known'

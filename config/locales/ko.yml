@@ -1,5 +1,5 @@
 ko:
-  application_name : 'SL 설문조사'
+  service_name : 'SL 설문조사'
   meta_description : ''
   meta_description_intro : ''
   meta_description_supports : ''
@@ -15,6 +15,7 @@ ko:
 
   site_address : '잠자는-사자'
   site_url : 'https://www.sleepinglion.pe.kr/'
+  jedearoweb : '제대로웹'
   hello : '안녕하세요'
   welcome : '님 환영합니다'
   admin_profile : '내정보 수정'
@@ -52,6 +53,9 @@ ko:
   close_popup : '창닫기'
   times : '번'
 
+
+  choose_file: '파일선택'
+  browse : '찾기'
   submit : '제출'
   submit_survey : '다음 설문하기 &#9654'
   edit_survey : '수정하기'
@@ -494,21 +498,27 @@ ko:
       education : '교육'
 
     attributes :
+      company :
+        title : '회사(단체)명'
+      branch :
+        title : '지점명'
       admin :
-        login_id : '아이디'
-        nickname : '별명'
-        email : 'E-Mail'
-        password : '비밀번호'
-        password_confirmation : '비밀번호 확인'
-        current_password : '현재 비밀번호'
-        photo : '사진'
-        flag : '사용여부'
-      operator :
-        login_id : '아이디'
         name : '이름'
+        email : '이메일'
+        password : '비밀번호'
+        password_confirmation : '비밀번호확인'
+        current_password : '현재비밀번호'
+      admin_picture :
+        picture : '사진'
+      operator :
+        name : ' 이름'
         email : 'E-Mail'
         password : '비밀번호'
         password_confirmation : '비밀번호 확인'
+        sign_in_count : '로그인수'
+        enable : '사용여부'
+        updated_at: '수정일시'
+        created_at: '생성일시'
       question_category :
         title : '제목'
         enable : '사용여부'
