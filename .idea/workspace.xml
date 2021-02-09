@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c653685-b5e3-4ec5-bf84-3907f858c168" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ea0cbf86-a9d5-4407-be2e-aa0e1231c84f.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/survey.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/survey.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Capfile" beforeDir="false" afterPath="$PROJECT_DIR$/Capfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/deploy/production.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/deploy/production.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20201201002154_create_devise_to_users.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20201201002154_create_devise_to_users.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +114,7 @@
       <workItem from="1610899957110" duration="443000" />
       <workItem from="1610900581777" duration="962000" />
       <workItem from="1611748282794" duration="39000" />
-      <workItem from="1612842546264" duration="89000" />
+      <workItem from="1612842546264" duration="1128000" />
     </task>
     <servers />
   </component>

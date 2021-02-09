@@ -50,8 +50,6 @@ class CreateDeviseToUsers < ActiveRecord::Migration[4.2]
     end
 
     add_index :users, :login_id, :unique => true
-    add_foreign_key :users, :educations, on_delete: :cascade, on_update: :cascade
-    add_foreign_key :users, :live_types, on_delete: :cascade, on_update: :cascade
   # add_index :admins, :reset_password_token, :unique => true
   # add_index :admins, :confirmation_token,   :unique => true
   # add_index :admins, :unlock_token,         :unique => true
