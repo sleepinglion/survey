@@ -79,6 +79,7 @@ group :production do
   gem 'dotenv-rails'
   gem 'recaptcha', :require => 'recaptcha/rails'
   gem 'rails-letsencrypt'
+  gem 'uglifier'
 
   #gem 'mini_racer', platforms: :ruby
   #gem 'execjs'
