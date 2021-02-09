@@ -1,4 +1,4 @@
-class CreateFamilyCategories < ActiveRecord::Migration[4.2]
+class CreateFamilyCategories < ActiveRecord::Migration[6.0]
   def change
     create_table :family_categories do |t|
       t.string :title, :null=>false

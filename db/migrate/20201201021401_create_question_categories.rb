@@ -1,4 +1,4 @@
-class CreateQuestionCategories < ActiveRecord::Migration[4.2]
+class CreateQuestionCategories < ActiveRecord::Migration[6.0]
   def change
     create_table :question_categories do |t|
       t.references :branch, :null => false

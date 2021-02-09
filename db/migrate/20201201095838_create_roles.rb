@@ -1,4 +1,4 @@
-class CreateRoles < ActiveRecord::Migration[4.2]
+class CreateRoles < ActiveRecord::Migration[6.0]
   def change
     create_table :roles do |t|
       t.string :title, :null=>false, :limit=>60

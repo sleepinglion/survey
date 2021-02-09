@@ -1,4 +1,4 @@
-class CreateDeviseToUsers < ActiveRecord::Migration[4.2]
+class CreateDeviseToUsers < ActiveRecord::Migration[6.0]
   def change
     create_table :users do |t|
       t.references :branch, :null => false

@@ -1,4 +1,4 @@
-class CreateSubQuestions < ActiveRecord::Migration[4.2]
+class CreateSubQuestions < ActiveRecord::Migration[6.0]
   def change
     create_table :sub_questions do |t|
       t.references :answer, :null=>false
@@ -8,7 +8,5 @@ class CreateSubQuestions < ActiveRecord::Migration[4.2]
       t.boolean :enable, :null=>false, :default=>false
       t.timestamps
     end
-
-    add_foreign_key :sub_questions, :answers, on_delete: :cascade, on_update: :cascade
   end
 end

@@ -1,4 +1,4 @@
-class CreateQuestions < ActiveRecord::Migration[4.2]
+class CreateQuestions < ActiveRecord::Migration[6.0]
   def change
     create_table :questions do |t|
       t.references :branch, :null => false
@@ -9,7 +9,5 @@ class CreateQuestions < ActiveRecord::Migration[4.2]
       t.boolean :enable, :null=>false, :default=>false
       t.timestamps
     end
-
-    add_foreign_key :questions, :question_categories, on_delete: :cascade, on_update: :cascade
   end
 end

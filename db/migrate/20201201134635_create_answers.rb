@@ -1,4 +1,4 @@
-class CreateAnswers < ActiveRecord::Migration[4.2]
+class CreateAnswers < ActiveRecord::Migration[6.0]
   def change
     create_table :answers do |t|
       t.references :question, :null=>false
@@ -11,8 +11,5 @@ class CreateAnswers < ActiveRecord::Migration[4.2]
       t.boolean :enable, :null=>false, :default=>false
       t.timestamps
     end
-
-    add_foreign_key :answers, :questions, on_delete: :cascade, on_update: :cascade
-#    add_index :answers, [:question_id,:title], :unique=>true, :name=>:answers_unique
   end
 end

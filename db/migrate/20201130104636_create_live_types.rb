@@ -1,4 +1,4 @@
-class CreateLiveTypes < ActiveRecord::Migration[4.2]
+class CreateLiveTypes < ActiveRecord::Migration[6.0]
   def change
     create_table :live_types do |t|
       t.string :title, :null=>false, :limit=>150

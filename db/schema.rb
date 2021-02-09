@@ -2,8 +2,8 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_01_07_130006) do
 
   create_table "admin_login_logs", force: :cascade do |t|
-    t.integer "admin_id", null: false
+    t.bigint "admin_id", null: false
     t.integer "client_ip", null: false
     t.boolean "enable", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_130006) do
   end
 
   create_table "admin_pictures", force: :cascade do |t|
-    t.integer "admin_id", null: false
+    t.bigint "admin_id", null: false
     t.string "picture", null: false
     t.boolean "enable", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -309,8 +309,6 @@ ActiveRecord::Schema.define(version: 2021_01_07_130006) do
   add_foreign_key "roles_admins", "roles", on_update: :cascade, on_delete: :cascade
   add_foreign_key "sub_answers", "sub_questions", on_update: :cascade, on_delete: :cascade
   add_foreign_key "sub_questions", "answers", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users", "educations", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users", "live_types", on_update: :cascade, on_delete: :cascade
   add_foreign_key "users_families", "families", on_update: :cascade, on_delete: :cascade
   add_foreign_key "users_families", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "users_questions", "questions", on_update: :cascade, on_delete: :cascade
