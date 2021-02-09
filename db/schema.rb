@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_130006) do
   end
 
   create_table "answers", force: :cascade do |t|
-    t.integer "question_id", null: false
+    t.bigint "question_id", null: false
     t.string "title", limit: 255, null: false
     t.string "photo", limit: 100
     t.integer "sub_questions_count", default: 0, null: false
@@ -67,8 +67,9 @@ ActiveRecord::Schema.define(version: 2021_01_07_130006) do
     t.boolean "default", default: false, null: false
     t.boolean "only", default: false, null: false
     t.boolean "enable", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
   create_table "branch_translations", force: :cascade do |t|
@@ -122,18 +123,19 @@ ActiveRecord::Schema.define(version: 2021_01_07_130006) do
   end
 
   create_table "families", force: :cascade do |t|
-    t.integer "family_category_id", null: false
+    t.bigint "family_category_id", null: false
     t.integer "member", default: 0, null: false
     t.boolean "enable", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["family_category_id"], name: "index_families_on_family_category_id"
   end
 
   create_table "family_categories", force: :cascade do |t|
     t.string "title", null: false
     t.boolean "enable", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -146,78 +148,84 @@ ActiveRecord::Schema.define(version: 2021_01_07_130006) do
   create_table "live_types", force: :cascade do |t|
     t.string "title", limit: 150, null: false
     t.boolean "enable", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "question_categories", force: :cascade do |t|
-    t.integer "branch_id", null: false
+    t.bigint "branch_id", null: false
     t.string "title", limit: 60, null: false
     t.integer "questions_count", default: 0, null: false
     t.boolean "female_only", default: false, null: false
     t.boolean "enable", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["branch_id"], name: "index_question_categories_on_branch_id"
   end
 
   create_table "question_descriptions", force: :cascade do |t|
-    t.integer "question_id", null: false
+    t.bigint "question_id", null: false
     t.text "description", limit: 255, null: false
     t.boolean "enable", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_question_descriptions_on_question_id"
   end
 
   create_table "questions", force: :cascade do |t|
-    t.integer "branch_id", null: false
-    t.integer "question_category_id", null: false
+    t.bigint "branch_id", null: false
+    t.bigint "question_category_id", null: false
     t.string "title", limit: 255, null: false
     t.integer "answers_count", default: 0, null: false
     t.boolean "multi_answer", default: false, null: false
     t.boolean "enable", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["branch_id"], name: "index_questions_on_branch_id"
+    t.index ["question_category_id"], name: "index_questions_on_question_category_id"
   end
 
   create_table "roles", force: :cascade do |t|
     t.string "title", limit: 60, null: false
     t.boolean "enable", default: true, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "roles_admins", force: :cascade do |t|
-    t.integer "role_id"
-    t.integer "admin_id"
-    t.index ["admin_id"], name: "index_roles_admins_on_admin_id", unique: true
-    t.index ["role_id", "admin_id"], name: "index_roles_admins_on_role_id_and_admin_id", unique: true
+    t.bigint "role_id", null: false
+    t.bigint "admin_id", null: false
+    t.index ["admin_id"], name: "index_roles_admins_on_admin_id"
+    t.index ["role_id"], name: "index_roles_admins_on_role_id"
   end
 
   create_table "sub_answers", force: :cascade do |t|
-    t.integer "sub_question_id", null: false
+    t.bigint "sub_question_id", null: false
     t.string "title", limit: 60, null: false
     t.string "photo", limit: 100
     t.boolean "has_custom", default: false, null: false
     t.boolean "default", default: false, null: false
     t.boolean "only", default: false, null: false
     t.boolean "enable", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["sub_question_id", "title"], name: "sub_answers_unique", unique: true
+    t.index ["sub_question_id"], name: "index_sub_answers_on_sub_question_id"
   end
 
   create_table "sub_questions", force: :cascade do |t|
-    t.integer "answer_id", null: false
+    t.bigint "answer_id", null: false
     t.string "title", limit: 150
     t.integer "sub_answers_count", default: 0, null: false
     t.boolean "multi_answer", default: false, null: false
     t.boolean "enable", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_sub_questions_on_answer_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "branch_id", null: false
+    t.bigint "branch_id", null: false
     t.string "login_id", limit: 60, null: false
     t.string "name", limit: 100, null: false
     t.date "birthday", null: false
@@ -228,97 +236,92 @@ ActiveRecord::Schema.define(version: 2021_01_07_130006) do
     t.integer "users_questions_count", default: 0, null: false
     t.integer "users_families_count", default: 0, null: false
     t.text "job", limit: 150
-    t.integer "live_type_id"
-    t.integer "education_id"
+    t.bigint "live_type_id"
+    t.bigint "education_id"
     t.integer "sign_in_count", default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["branch_id"], name: "index_users_on_branch_id"
+    t.index ["education_id"], name: "index_users_on_education_id"
+    t.index ["live_type_id"], name: "index_users_on_live_type_id"
     t.index ["login_id"], name: "index_users_on_login_id", unique: true
   end
 
   create_table "users_families", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "family_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.bigint "user_id", null: false
+    t.bigint "family_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["family_id"], name: "index_users_families_on_family_id"
     t.index ["user_id", "family_id"], name: "index_users_families_on_user_id_and_family_id", unique: true
+    t.index ["user_id"], name: "index_users_families_on_user_id"
   end
 
   create_table "users_questions", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "question_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "question_id", null: false
     t.integer "users_questions_answers_count", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_users_questions_on_question_id"
     t.index ["user_id", "question_id"], name: "index_users_questions_on_user_id_and_question_id", unique: true
+    t.index ["user_id"], name: "index_users_questions_on_user_id"
   end
 
   create_table "users_questions_answers", force: :cascade do |t|
-    t.integer "users_question_id", null: false
-    t.integer "answer_id", null: false
+    t.bigint "users_question_id", null: false
+    t.bigint "answer_id", null: false
     t.integer "users_questions_answers_sub_questions_count", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_users_questions_answers_on_answer_id"
     t.index ["users_question_id", "answer_id"], name: "users_qa_unique", unique: true
+    t.index ["users_question_id"], name: "index_users_questions_answers_on_users_question_id"
   end
 
   create_table "users_questions_answers_custom_answers", force: :cascade do |t|
-    t.integer "users_questions_answer_id", null: false
+    t.bigint "users_questions_answer_id", null: false
     t.string "title", limit: 255, null: false
     t.boolean "enable", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["users_questions_answer_id"], name: "uqaca_users_questions_answer_id", unique: true
   end
 
   create_table "users_questions_answers_sub_questions", force: :cascade do |t|
-    t.integer "users_questions_answer_id", null: false
-    t.integer "sub_question_id", null: false
+    t.bigint "users_questions_answer_id", null: false
+    t.bigint "sub_question_id", null: false
     t.integer "users_questions_answers_sub_questions_sub_answers_count", default: 0, null: false
     t.boolean "enable", default: true, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sub_question_id"], name: "uqas_sub_question_id"
     t.index ["users_questions_answer_id", "sub_question_id"], name: "users_sub_q_unique", unique: true
+    t.index ["users_questions_answer_id"], name: "uqas_users_questions_answer_id"
   end
 
   create_table "users_questions_answers_sub_questions_sub_answers", force: :cascade do |t|
-    t.integer "users_questions_answers_sub_question_id", null: false
-    t.integer "sub_answer_id", null: false
+    t.bigint "users_questions_answers_sub_question_id", null: false
+    t.bigint "sub_answer_id", null: false
     t.boolean "enable", default: true, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sub_answer_id"], name: "uqass_sub_answer_id"
     t.index ["users_questions_answers_sub_question_id", "sub_answer_id"], name: "users_sub_qa_unique", unique: true
+    t.index ["users_questions_answers_sub_question_id"], name: "uqass_users_questions_answers_sub_question_id"
   end
 
   create_table "users_questions_answers_sub_questions_sub_answers_custom_answers", force: :cascade do |t|
-    t.integer "users_questions_answers_sub_questions_sub_answer_id", null: false
+    t.bigint "users_questions_answers_sub_questions_sub_answer_id", null: false
     t.string "title", limit: 255, null: false
     t.boolean "enable", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["users_questions_answers_sub_questions_sub_answer_id"], name: "uqassa_users_questions_answers_sub_questions_sub_answer_id"
   end
 
-  add_foreign_key "answers", "questions", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "families", "family_categories", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "question_descriptions", "questions", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "questions", "question_categories", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "roles_admins", "admins", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "roles_admins", "roles", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "sub_answers", "sub_questions", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "sub_questions", "answers", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users_families", "families", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users_families", "users", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users_questions", "questions", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users_questions", "users", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users_questions_answers", "answers", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users_questions_answers", "users_questions", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users_questions_answers_custom_answers", "users_questions_answers", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users_questions_answers_sub_questions", "sub_questions", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users_questions_answers_sub_questions", "users_questions_answers", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users_questions_answers_sub_questions_sub_answers", "sub_answers", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users_questions_answers_sub_questions_sub_answers", "users_questions_answers_sub_questions", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "users_questions_answers_sub_questions_sub_answers_custom_answers", "users_questions_answers_sub_questions_sub_answers", on_update: :cascade, on_delete: :cascade
 end
